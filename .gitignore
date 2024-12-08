@@ -3,3 +3,4 @@ temp/*
 /lua.bat
 /lua_modules
 /.luarocks
+/luarocks.bat

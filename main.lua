@@ -1,41 +1,16 @@
 local objects = require 'src.object'
-local tossam = require 'tossam.tossam'
+local assets = require 'src.assets'
+local button = require 'src.objects.button'
 
 function love.load()
-
-    objects.add({
-        x = 100,
-        y = 100,
-        keypressed = function(self, key)
-            if key == 'up' then
-                self.y = self.y - 10
-            elseif key == 'down' then
-                self.y = self.y + 10
-            elseif key == 'left' then
-                self.x = self.x - 10
-            elseif key == 'right' then
-                self.x = self.x + 10
-            end
-        end,
-        draw = function(self)
-            love.graphics.setColor(255, 0, 0)
-            love.graphics.rectangle('fill', self.x, self.y, 50, 50)
-        end,
-    })
+    assets.load()
+    button.new(100, 100, 100, 50, 'Click me!', function()
+        print('Button clicked!')
+    end)
 end
 
 function love.update(dt)
     objects.update(dt)
-
-    if love.keyboard.isDown('escape') then
-        mote = tossam.connect {
-            protocol = "sf",
-            host     = "localhost",
-            port     = 9002,
-            nodeid   = 1
-        }
-        if not(mote) then print("Connection error!"); return(1); end
-    end
 end
 
 function love.draw()
